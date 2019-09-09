@@ -1,5 +1,5 @@
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles'
 import SearchResult from './SearchResult'
 import UserCard from './UserCard'
 
@@ -7,7 +7,12 @@ const styles = theme => ({
     location: {
         display: 'flex',
     },
-});
+    userLocation: {
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'space-around',
+    },
+})
 
 class ResultArea extends React.Component {
     render() {
@@ -22,7 +27,7 @@ class ResultArea extends React.Component {
                         ))
                     }
                 </div>
-                <div>
+                <div className={classes.userLocation}>
                     {
                         user && (
                             <UserCard user={user}/>
