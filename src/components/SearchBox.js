@@ -3,13 +3,14 @@ import { withStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import Search from '@material-ui/icons/Search'
 import Creatable from 'react-select'
+
 const styles = theme => ({
     filedLocation: {
         display: 'flex',
         marginLeft: '50px',
     },
     inputSize: {
-      width: '200px',
+        width: '200px',
     },
 })
 
@@ -35,6 +36,12 @@ class SearchBox extends React.Component {
         filterSearch(event)
     }
 
+    handleEmptyInput = () => {
+        const { filterSearch } = this.props
+        this.setState({ name: '', selectedUser: null })
+        filterSearch('')
+    }
+
     handleClick = () => event => {
         const { openUserCard } = this.props
         const { selectedUser } = this.state
@@ -46,13 +53,13 @@ class SearchBox extends React.Component {
     options = () => {
         const { users } = this.props
         if (users) {
-            return users.map(user => ({ value: user.login.uuid, label: user.name.first }))
+            return users.map(user => ({ value: user.login.uuid, label: `${user.name.first} ${user.name.last}` }))
         }
         return null
     }
 
     render() {
-        const { classes } = this.props
+        const { classes, users } = this.props
         const optionsFunc = this.options()
         return (
             <div className={classes.filedLocation}>
@@ -64,8 +71,11 @@ class SearchBox extends React.Component {
                     options={optionsFunc}
                     onChange={this.handleSelectedChange()}
                     onInputChange={(...args) => {
-                        if(args[1].action === 'input-change'){
+                        if (args[1].action === 'input-change') {
                             this.handleInputChange(args[0])
+                        }
+                        if ((args[1].action === 'menu-close') && users.length === 0){
+                            this.handleEmptyInput()
                         }
                     }}
                 />

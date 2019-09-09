@@ -26,7 +26,7 @@ class App extends React.Component {
 
     filterSearch = async (name) => {
         const { data } = this.state
-        const filterList = data.filter(user => user.name.first.startsWith(name))
+        const filterList = data.filter(user => `${user.name.first} ${user.name.last}`.startsWith(name))
         if (filterList) {
             this.setState({ filterUsers: filterList })
         }

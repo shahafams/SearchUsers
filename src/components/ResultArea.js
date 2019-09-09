@@ -12,6 +12,9 @@ const styles = theme => ({
         width: '100%',
         justifyContent: 'space-around',
     },
+    usersResultLocation: {
+        width: '320px',
+    },
 })
 
 class ResultArea extends React.Component {
@@ -20,7 +23,7 @@ class ResultArea extends React.Component {
 
         return (
             <div className={classes.location}>
-                <div>
+                <div className={classes.usersResultLocation}>
                     {
                         users.map((user, index) => (
                             <SearchResult key={index} user={user}/>
