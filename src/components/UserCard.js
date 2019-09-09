@@ -39,6 +39,15 @@ class UserCard extends React.Component {
         nameContent: 'email',
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props !== prevProps) {
+            this.setState({
+                content: this.props.user.email,
+                nameContent: 'email',
+            })
+        }
+    }
+
     handelHover = (nameContent, content) => {
         this.setState({ nameContent, content })
     }
